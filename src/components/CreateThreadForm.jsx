@@ -10,10 +10,15 @@ export default function CreateThreadForm() {
   const mutation = useMutation({
     mutationFn: createThread,
     // TODO (Task 3): on success, fire a green toast: showToast("Thread posted!", "success")
-    onSuccess: () => {},
+    onSuccess: () => {
+      showToast("Thread posted!", "success");
+    },
     // TODO (Task 3): on error, read error.response?.data?.message (fall back to a generic
     //   string) and fire a red toast: showToast(message, "error")
-    onError: () => {},
+    onError: (error) => {
+      const message = error.response?.data?.message || "Something went wrong";
+      showToast(message, "error");
+    },
   });
 
   function handleSubmit(e) {

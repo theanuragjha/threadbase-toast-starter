@@ -11,9 +11,14 @@ export default function LoginForm() {
   const mutation = useMutation({
     mutationFn: login,
     // TODO (Task 3): on success, fire a success toast (e.g. "Welcome back!")
-    onSuccess: () => {},
+    onSuccess: () => {
+      showToast("Welcome back!", "success");
+    },
     // TODO (Task 3): on error, read error.response?.data?.message and fire an error toast
-    onError: () => {},
+    onError: (error) => {
+      const message = error.response?.data?.message || "Invalid credentials";
+      showToast(message, "error");
+    },
   });
 
   function handleSubmit(e) {
